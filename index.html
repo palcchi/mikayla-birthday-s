@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Digital</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: white;
+            overflow: hidden;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none; /* Video disembunyikan sebelum tombol diklik */
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #ff5722;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e64a19;
+        }
+    </style>
+</head>
+<body>
+    <video id="bg-video" playsinline>
+        <source src="mikayla.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="overlay" id="overlay">
+        <h1>Happy Birthday</h1>
+        <p>Mikayla Aura Alensyah</p>
+        <button onclick="playVideo()">Buka undangan</button>
+    </div>
+
+    <script>
+        const video = document.getElementById('bg-video');
+        const overlay = document.getElementById('overlay');
+
+        function playVideo() {
+            overlay.style.display = 'none'; // Sembunyikan overlay
+            video.style.display = 'block'; // Tampilkan video
+            video.muted = false; // Aktifkan suara
+            video.play(); // Mainkan video
+        }
+    </script>
+</body>
+</html>
