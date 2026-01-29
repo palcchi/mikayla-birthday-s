@@ -19,7 +19,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #f7f4ef;
+    background: linear-gradient(135deg, #ffb6e6, #ffd1f0, #b5f0ff);
     font-family: 'Playfair Display', serif;
     overflow: hidden;
 }
@@ -40,12 +40,45 @@ video {
 .container {
     width: 90%;
     max-width: 600px;
-    background: rgba(253, 250, 245, 0.95);
+    background: rgba(255, 240, 250, 0.95);
     padding: 60px 40px;
     text-align: center;
     position: relative;
     z-index: 2;
     animation: fadeIn 1.2s ease;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(255, 105, 180, 0.4);
+}
+
+/* Floating bubbles */
+.container::before,
+.container::after {
+    content: "🫧";
+    position: absolute;
+    font-size: 2rem;
+    animation: float 4s ease-in-out infinite;
+}
+
+.container::before {
+    top: -20px;
+    left: 20px;
+}
+
+.container::after {
+    bottom: -20px;
+    right: 20px;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-20px);
+        opacity: 1;
+    }
 }
 
 @keyframes fadeIn {
@@ -63,87 +96,52 @@ video {
     font-family: 'Allura', cursive;
     font-size: 4rem;
     margin-bottom: 20px;
-}
-
-.subtitle {
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
+    color: #ff4fa3;
+    text-shadow: 0 0 10px rgba(255, 79, 163, 0.5);
 }
 
 .event-title {
     font-size: 2.2rem;
     font-weight: 700;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    color: #ff1493;
 }
 
 .divider {
     width: 100%;
-    height: 1px;
-    background: #333;
-    margin: 30px 0;
+    height: 3px;
+    background: linear-gradient(to right, #ff69b4, #87cefa);
+    border-radius: 10px;
+    margin: 25px 0;
 }
 
-.info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left;
-    gap: 20px;
-}
-
-.left, .right {
-    width: 50%;
-}
-
-.day {
-    font-family: 'Allura', cursive;
-    font-size: 3rem;
-}
-
-.date {
-    font-size: 1.3rem;
-    letter-spacing: 2px;
-}
-
-.time {
-    font-size: 1.3rem;
+/* Guest */
+.guest {
+    font-size: 1.4rem;
+    color: #ff69b4;
     margin-bottom: 10px;
 }
 
-.address {
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
-.footer {
-    margin-top: 40px;
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-}
-
-.guest {
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-}
-
+/* Button */
 button {
     margin-top: 30px;
-    padding: 14px 35px;
+    padding: 16px 40px;
     border-radius: 50px;
     border: none;
-    background: #000;
+    background: linear-gradient(45deg, #ff69b4, #00cfff);
     color: #fff;
-    font-size: 1rem;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: 0.3s ease;
+    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.5);
 }
 
 button:hover {
-    background: #444;
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(0, 207, 255, 0.6);
 }
 
+/* Mobile */
 @media (max-width: 500px) {
     .invited {
         font-size: 3rem;
@@ -151,15 +149,6 @@ button:hover {
 
     .event-title {
         font-size: 1.7rem;
-    }
-
-    .info {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .left, .right {
-        width: 100%;
     }
 }
 </style>
@@ -182,24 +171,9 @@ button:hover {
 
     <div class="divider"></div>
 
-    <div class="info">
-        <div class="left">
-                <div class="guest">
-                To: <strong><span id="guest-name">Kamu</span></strong>
-                </div>
-            <div class="day">Sabtu</div>
-            <div class="date">31 Januari 2026</div>
-        </div>
-
-        <div class="right">
-            <div class="time">14:00 s/d selesai</div>
-            <div class="address">
-                Jl. Siderejo Gg. Cengkeh No. 8
-            </div>
-        </div>
+    <div class="guest">
+        To: <strong><span id="guest-name">Kamu</span></strong>
     </div>
-
-    <div class="divider"></div>
 
     <button onclick="playVideo()">Buka Undangan</button>
 </div>
