@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Undangan Mikayla</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Allura&display=swap" rel="stylesheet">
 
 <style>
@@ -22,15 +21,30 @@ body {
     align-items: center;
     background: #f7f4ef;
     font-family: 'Playfair Display', serif;
+    overflow: hidden;
 }
 
+/* Video Background */
+video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    z-index: 1;
+}
+
+/* Overlay */
 .container {
     width: 90%;
     max-width: 600px;
-    background: #fdfaf5;
+    background: rgba(253, 250, 245, 0.95);
     padding: 60px 40px;
     text-align: center;
     position: relative;
+    z-index: 2;
     animation: fadeIn 1.2s ease;
 }
 
@@ -45,7 +59,6 @@ body {
     }
 }
 
-/* Title */
 .invited {
     font-family: 'Allura', cursive;
     font-size: 4rem;
@@ -64,7 +77,6 @@ body {
     margin-bottom: 40px;
 }
 
-/* Divider */
 .divider {
     width: 100%;
     height: 1px;
@@ -72,7 +84,6 @@ body {
     margin: 30px 0;
 }
 
-/* Info Layout */
 .info {
     display: flex;
     justify-content: space-between;
@@ -105,20 +116,17 @@ body {
     line-height: 1.5;
 }
 
-/* Footer */
 .footer {
     margin-top: 40px;
     font-size: 0.9rem;
     letter-spacing: 2px;
 }
 
-/* Guest */
 .guest {
     margin-bottom: 20px;
     font-size: 1.2rem;
 }
 
-/* Button */
 button {
     margin-top: 30px;
     padding: 14px 35px;
@@ -136,7 +144,6 @@ button:hover {
     transform: translateY(-2px);
 }
 
-/* Mobile */
 @media (max-width: 500px) {
     .invited {
         font-size: 3rem;
@@ -160,7 +167,14 @@ button:hover {
 
 <body>
 
-<div class="container">
+<!-- VIDEO -->
+<video id="bg-video" playsinline>
+    <source src="mikaylaa.mov" type="video/mp4">
+    Browser kamu tidak mendukung video.
+</video>
+
+<!-- OVERLAY -->
+<div class="container" id="overlay">
 
     <div class="invited">You are Invited</div>
 
@@ -176,38 +190,39 @@ button:hover {
                 To: <strong><span id="guest-name">Kamu</span></strong>
                 </div>
             <div class="day">Minggu</div>
-            <div class="date">30 Januari 2026</div>
+            <div class="date">30 Januari</div>
         </div>
 
         <div class="right">
             <div class="time">6:00 - 8:00 PM</div>
             <div class="address">
-                Lokasi Acara
+                Alamat Disini
             </div>
         </div>
     </div>
 
     <div class="divider"></div>
 
-    <button onclick="openInvitation()">Buka Undangan</button>
+    <button onclick="playVideo()">Buka Undangan</button>
 </div>
 
 <script>
-// Ambil nama dari URL
 function getGuestName() {
     const params = new URLSearchParams(window.location.search);
     const slug = window.location.pathname.replace("/", "");
-
     return params.get("nama") || decodeURIComponent(slug) || "Kamu";
 }
 
 document.getElementById("guest-name").textContent = getGuestName();
 
-// Tombol buka undangan
-function openInvitation() {
-    alert("Undangan Mikayla Dibuka 🎉\n(Sambungkan ke video atau halaman berikutnya)");
-    // Contoh redirect:
-    // window.location.href = "video.html";
+function playVideo() {
+    const overlay = document.getElementById("overlay");
+    const video = document.getElementById("bg-video");
+
+    overlay.style.display = "none";
+    video.style.display = "block";
+    video.muted = false;
+    video.play();
 }
 </script>
 
